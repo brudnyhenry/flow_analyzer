@@ -11,7 +11,7 @@ def customer(request):
     current_year = datetime.datetime.now().year
     loop_range = range(2012, current_year + 1)
 
-    # Check if it's a POST or GET request and return appropriate template
+    # Check if it's a POST or GET request and return appropriat e template
     if request.method == 'POST':
         client_pk = request.POST.get("customer_id", "")
         selected_year = request.POST.get("year", "")
