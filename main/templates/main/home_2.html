@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% if user.is_authenticated %}
+
+
+<table data-toggle="table"
+       data-query-params="queryParams"
+       data-pagination="true"
+       data-search="true"
+       data-toolbar="#toolbar"
+       data-show-export="true"
+       data-height="300">
+    <thead>
+    <tr>
+        <th data-field="Client" data-sortable="true" data-sorter="htmlSorter">Client</th>
+        <th data-field="IP" data-sortable="true">IP</th>
+        <th data-field="Download" data-sortable="true">Download</th>
+        <th data-field="Upload" data-sortable="true">Upload</th>
+        <th data-field="Total" data-sortable="true">Total</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <!-- For loop iterating through top_traffic dictionary
+        ================================================== -->
+
+    {% for cl,tr in top_traffic.items %}
+    <tr>
+
+        <td> {{ cl.clientName }}</td>
+        <td> {{ cl.clientIP }}</td>
+        <td> {{ tr.trafficDownload }}</td>
+        <td> {{ tr.trafficUpload }}</td>
+        <td> {{ tr.trafficUpload|add:tr.trafficDownload }}</td>
+    </tr>
+    {% empty %}
+        <td> Sorry no data</td>
+    {% endfor %}
+
+    </tbody>
+</table>
+
+{% endif %}
+
+{% endblock content %}
